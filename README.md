@@ -22,3 +22,5 @@ Screenshots
 
 
 ![Main Screen](http://i.imgur.com/yiZhi.png)
+
+![Now With File Backtrace](http://i.imgur.com/Ng5AB.png)

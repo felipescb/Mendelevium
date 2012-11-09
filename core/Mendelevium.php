@@ -19,6 +19,7 @@
 
 		/* Project Name , used by Melenevium for creating beauty semantic internal log getters */
 		public $projName;
+		private $traceName;
 
 
 		function __construct($_projName){
@@ -38,6 +39,7 @@
 
 
 				$this->projName = $_projName;
+				$this->traceName = $_projName."F";
 
 			}
 			catch (Exception $e) {
@@ -46,13 +48,14 @@
 			}
 		}
 
-		function log($message = NULL, $file = __FILE__ , $line = __LINE__){
+		function log($message = NULL){
 			try {
+				$trace = debug_backtrace();
 				if(is_null($message) || trim($message) == '') throw new Exception("Invalid Log Message");
 				else{
 					$this->redis->set($this->projName.'LogN'.$this->num_helper,$message);
 					$this->redis->rpush($this->projName, $message);
-					$this->redis->rpush($this->projName."F",$file.' on line '.$line);
+					$this->redis->rpush($this->traceName,$trace[0]['file'].' on line '.$trace[0]['line']);
 					if($this->redis->incr('Mendelevium'.$this->projName.'EC')){
 						$this->num_helper++;
 					} else throw new Exception("Can't Elevate Internal Helper. \n It Should Never Get This Error Since Logic is Perfect!");
@@ -64,7 +67,7 @@
 
 		function getAll(){
 			$matrixAux[] = $this->redis->lrange($this->projName, 0, -1);
-			$matrixAux[] = $this->redis->lrange($this->projName."F", 0, -1);
+			$matrixAux[] = $this->redis->lrange($this->traceName, 0, -1);
 			return $matrixAux;
 		}
 
