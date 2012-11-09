@@ -4,6 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Mendelevium - Web Interface</title>
     <link rel="stylesheet" href="static/css/reset.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="static/css/main.css" type="text/css" media="screen" charset="utf-8">
 </head>
 <body>
@@ -22,15 +23,29 @@
     </header>
 
     <div class="body">
-
     	<?php
-    	/*
     		require '../core/Mendelevium.php';
-    		$m = new Mendelevium('lifeGood');
-    		$m->log("arroz");
-    		echo $m->redis->get('lifeGoodLogN0');
-    	*/
-    	 ?>
+    		$Mendelevium = new Mendelevium('lifeGood');
+    		$Mendelevium->log("user deleted");
+		?>
+    	<br>
+ 		<table class="table table-striped table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th class="job-id-col">ID</th>
+                    <th> Log Message </th>
+                </tr>
+            </thead>
+            <tbody>
+            	<?php foreach($Mendelevium->getAll() as $a => $b){ ?>
+                <tr>
+                    <td><?php echo $a; ?></td>
+                    <td><?php echo $b; ?></td>
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+
 
     </div>
 <footer>

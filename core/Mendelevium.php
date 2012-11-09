@@ -15,7 +15,7 @@
 
 
 		/* Integer Var used as helper so I can discover how many logs really exists in memory */
-		public static $num_helper;
+		public $num_helper;
 
 		/* Project Name , used by Melenevium for creating beauty semantic internal log getters */
 		public $projName;
@@ -51,6 +51,7 @@
 				if(is_null($message) || trim($message) == '') throw new Exception("Invalid Log Message");
 				else{
 					$this->redis->set($this->projName.'LogN'.$this->num_helper,$message);
+					$this->redis->rpush($this->projName, $message);
 					if($this->redis->incr('MendeleviumEC')){
 						$this->num_helper++;
 					} else throw new Exception("Can't Elevate Internal Helper. \n It Should Never Get This Error Since Logic is Perfect!");
@@ -58,6 +59,10 @@
 			} catch (Exception $e) {
 				echo $e->getMessage();
 			}
+		}
+
+		function getAll(){
+			return $this->redis->lrange($this->projName, 0, -1);
 		}
 
 	}
