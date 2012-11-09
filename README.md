@@ -13,4 +13,4 @@ Screenshots
 ===========
 
 
-(http://i.imgur.com/yiZhi.png)
+[Main Screen](http://i.imgur.com/yiZhi.png)
