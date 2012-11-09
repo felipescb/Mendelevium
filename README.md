@@ -1,7 +1,7 @@
 Mendelevium
 ===========
 
-Mendelevium is a PHP Log Center that relies on Redis as backend.
+Mendelevium is a PHP Log Center that relies on Redis as a backend.
 
 There are two main motivations for the creation of Mendelevium :
 
@@ -12,15 +12,18 @@ There are two main motivations for the creation of Mendelevium :
 Usage
 =====
 
-Take the whole folder Mendelevium and add it to your project, find out for $projName and change it to something that suits your project.
+Take the whole folder Mendelevium and add it to your project, find out for on MendeleviumClient.php: 
 
-So, just do above your project $Mendelevium->log("message here") and be happy.
+    $projName = 'Default'
 
+and change it to something that suits your project. Currently It only supports one instance by project since the web interface
+only manage to handler one instance. But by now you can easily change it for multiple project side support.
+
+So, just do anywhere Mendelevium is included: 
+
+    $Mendelevium->log("message here");
 
 Screenshots
 ===========
 
-
-![Main Screen](http://i.imgur.com/yiZhi.png)
-
-![Now With File Backtrace](http://i.imgur.com/Ng5AB.png)
+![Main Screen](http://i.imgur.com/Ng5AB.png)
