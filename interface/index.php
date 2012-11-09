@@ -32,17 +32,21 @@
  		<table class="table table-striped table-bordered table-condensed">
             <thead>
                 <tr>
-                    <th class="job-id-col">ID</th>
-                    <th> Log Message </th>
+                    <th class="job-id-col"> Log Message </th>
+                    <th> Disparated File </th>
                 </tr>
             </thead>
             <tbody>
-            	<?php foreach($Mendelevium->getAll() as $a => $b){ ?>
-                <tr>
-                    <td><?php echo $a; ?></td>
-                    <td><?php echo $b; ?></td>
-                </tr>
-                <?php } ?>
+            	<?php
+            	$m = $Mendelevium->getAll();
+            	for($i = 0; $i < $Mendelevium->num_helper; $i++)
+            	{
+            		?>
+            		<tr>
+            			<td> <?php echo $m[0][$i]; ?> </td>
+            			<td> <?php echo $m[1][$i]; ?> </td>
+            		</tr>
+            	<?php } ?>
             </tbody>
         </table>
 

@@ -46,12 +46,13 @@
 			}
 		}
 
-		function log($message = NULL){
+		function log($message = NULL, $file = __FILE__ , $line = __LINE__){
 			try {
 				if(is_null($message) || trim($message) == '') throw new Exception("Invalid Log Message");
 				else{
 					$this->redis->set($this->projName.'LogN'.$this->num_helper,$message);
 					$this->redis->rpush($this->projName, $message);
+					$this->redis->rpush($this->projName."F",$file.' on line '.$line);
 					if($this->redis->incr('MendeleviumEC')){
 						$this->num_helper++;
 					} else throw new Exception("Can't Elevate Internal Helper. \n It Should Never Get This Error Since Logic is Perfect!");
@@ -62,7 +63,9 @@
 		}
 
 		function getAll(){
-			return $this->redis->lrange($this->projName, 0, -1);
+			$matrixAux[] = $this->redis->lrange($this->projName, 0, -1);
+			$matrixAux[] = $this->redis->lrange($this->projName."F", 0, -1);
+			return $matrixAux;
 		}
 
 	}
