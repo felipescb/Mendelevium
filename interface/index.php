@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="static/css/reset.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="static/css/main.css" type="text/css" media="screen" charset="utf-8">
+    <?php require '../mendeleviumClient.php'; ?>
 </head>
 <body>
     <header>
@@ -23,11 +24,6 @@
     </header>
 
     <div class="body">
-    	<?php
-    		require '../core/Mendelevium.php';
-    		$Mendelevium = new Mendelevium('lifeGood');
-    		$Mendelevium->log("user deleted");
-		?>
     	<br>
  		<table class="table table-striped table-bordered table-condensed">
             <thead>

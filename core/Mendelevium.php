@@ -29,11 +29,11 @@
 	    		 'port'   => $this->_redisPort,
 				));
 
-				if(!$this->redis->exists('MendeleviumEC')){
-					$this->redis->set("MendeleviumEC",0);
-					$this->num_helper = $this->redis->get("MendeleviumEC");
+				if(!$this->redis->exists('Mendelevium'.$_projName.'EC')){
+					$this->redis->set('Mendelevium'.$_projName.'EC',0);
+					$this->num_helper = $this->redis->get('Mendelevium'.$_projName.'EC');
 				}else{
-					$this->num_helper = $this->redis->get("MendeleviumEC");
+					$this->num_helper = $this->redis->get('Mendelevium'.$_projName.'EC');
 				}
 
 
@@ -53,7 +53,7 @@
 					$this->redis->set($this->projName.'LogN'.$this->num_helper,$message);
 					$this->redis->rpush($this->projName, $message);
 					$this->redis->rpush($this->projName."F",$file.' on line '.$line);
-					if($this->redis->incr('MendeleviumEC')){
+					if($this->redis->incr('Mendelevium'.$this->projName.'EC')){
 						$this->num_helper++;
 					} else throw new Exception("Can't Elevate Internal Helper. \n It Should Never Get This Error Since Logic is Perfect!");
 				}
