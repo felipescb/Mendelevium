@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="static/css/reset.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="static/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="static/css/main.css" type="text/css" media="screen" charset="utf-8">
-    <?php require '../mendeleviumClient.php'; ?>
 </head>
 <body>
     <header>
@@ -22,31 +21,20 @@
             </div>
         </div>
     </header>
-
     <div class="body">
-    	<br>
- 		<table class="table table-striped table-bordered table-condensed">
-            <thead>
-                <tr>
-                    <th class="job-id-col"> Log Message </th>
-                    <th> Disparated File </th>
-                </tr>
-            </thead>
-            <tbody>
-            	<?php
-            	$m = $Mendelevium->getAll();
-            	for($i = 0; $i < $Mendelevium->num_helper; $i++)
-            	{
-            		?>
-            		<tr>
-            			<td> <?php echo $m[0][$i]; ?> </td>
-            			<td> <?php echo $m[1][$i]; ?> </td>
-            		</tr>
-            	<?php } ?>
-            </tbody>
-        </table>
+    	<div class="wrapper">
+    		<br><br>
+    	<p> Mendelevium is a PHP Log Engine for fast and simple logs wich is builden over Redis.
+    		<br> By This I'm saying that It saves the log errors on memory and It creates a nice web interface for
+    	    the log monitoring.
+    	 </p>
+    	 <br>
+    	 <p> Currently I don't have any idea for new features but I'm looking forward ideas, so: </p>
+    	 <br>
 
-
+    	 <strong>de.souza258@gmail.com</strong> <br>
+    	 <strong>github.com/inazagi</strong>
+</div>
     </div>
 <footer>
         <div class="cell">
