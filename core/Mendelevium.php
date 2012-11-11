@@ -20,7 +20,7 @@
 		/* Project Name , used by Melenevium for creating beauty semantic internal log getters */
 		public $projName;
 		private $traceName;
-
+		private $logController;
 
 		function __construct($_projName){
 			try {
@@ -30,11 +30,13 @@
 	    		 'port'   => $this->_redisPort,
 				));
 
-				if(!$this->redis->exists('Mendelevium'.$_projName.'EC')){
-					$this->redis->set('Mendelevium'.$_projName.'EC',0);
-					$this->num_helper = $this->redis->get('Mendelevium'.$_projName.'EC');
+				$this->logController = 'Mendelevium'.$_projName.'EC';
+
+				if(!$this->redis->exists($this->logController)){
+					$this->redis->set($this->logController,0);
+					$this->num_helper = $this->redis->get($this->logController);
 				}else{
-					$this->num_helper = $this->redis->get('Mendelevium'.$_projName.'EC');
+					$this->num_helper = $this->redis->get($this->logController);
 				}
 
 
@@ -56,7 +58,7 @@
 					$this->redis->set($this->projName.'LogN'.$this->num_helper,$message);
 					$this->redis->rpush($this->projName, $message);
 					$this->redis->rpush($this->traceName,$trace[0]['file'].' on line '.$trace[0]['line']);
-					if($this->redis->incr('Mendelevium'.$this->projName.'EC')){
+					if($this->redis->incr($this->logController)){
 						$this->num_helper++;
 					} else throw new Exception("Can't Elevate Internal Helper. \n It Should Never Get This Error Since Logic is Perfect!");
 				}
